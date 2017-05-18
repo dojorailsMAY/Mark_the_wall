@@ -4,11 +4,7 @@ def index
 end
 
 def login
-  user = User.find_by(email:params[:email])
-  puts user
-  puts user.password
-  puts "*********************************"
-  puts params[:password]
+  user = User.find_by_email(params[:email])
   if params[:password] == user.password
     session[:user_name] = user.name
     session[:user_id] = user.id
@@ -26,10 +22,12 @@ end
 
 def register
   @user = User.new(register_params)
-  session[:user_name] = @user.name
-  puts session[:user_id]
-  @user.save
-  session[:user_id] = @user.id
+  if !@user.save  # Check user validations before setting session
+    flash[:notice] = @user.errors.full_messages
+  else
+    session[:user_name] = @user.name
+    session[:user_id] = @user.id
+  end
   redirect_to '/home'
 end
 

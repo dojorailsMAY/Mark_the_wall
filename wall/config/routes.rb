@@ -1,18 +1,25 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-get '/login' => 'users#index'
+	root 'posts#home'
 
-post '/login' => 'users#login'
+	get '/login' => 'users#index'
+	# get '/login' => 'users#login'  # (reserve 'index' for list of all users)
 
-post '/register' => 'users#register'
+	post '/login' => 'users#login'
 
-get '/home' => 'posts#home'
+	post '/register' => 'users#register'
+	# post '/users' => 'users#create'
 
-post '/new/:message_id' => 'posts#create_comment'
+	get '/home' => 'posts#home'
+	# get '/posts' => 'posts#index'
 
-post '/messages/create' => 'posts#create_message'
+	post '/new/:message_id' => 'posts#create_comment'
+	# post '/posts/:post_id/comments' => 'comments#create'
 
-get 'users/logout' => 'users#logout'
+	post '/messages/create' => 'posts#create_message'
+	# post '/posts' => 'posts#create'
+
+	get 'users/logout' => 'users#logout'
 
 end

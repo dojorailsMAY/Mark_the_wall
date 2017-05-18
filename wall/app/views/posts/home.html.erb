@@ -18,20 +18,21 @@ Hello <%= session[:user_name] %>
 <h3>
   -----------<%= message.content %>-------------
 </h3>
+<!-- CAREFUL WITH INDENTATION ::: IT CAN HELP OR HURT -->
 <% @comments.each do |comment| %>
-    <ul>
-      <% if comment.message_id === message.id %>
+  <ul>
+    <% if comment.message_id == message.id %>
       <li>
-      <h4><%= comment.content %></h4>
-      <h6>--<%= comment.user.name %></h6>
-    </li>
-      <% end %>
-    </ul>
+        <h4><%= comment.content %></h4>
+        <h6>--<%= comment.user.name %></h6>
+      </li>
     <% end %>
-    <form class="" action="/new/<%= message.id %>" method="post">
-      <input type="text" name="content" value="" placeholder="Comment">
-      <input type="submit" name="" value="Post">
-      <input type="hidden" name='authenticity_token' value="<%= form_authenticity_token %>">
-    </form>
+  </ul>
+<% end %>
+  <form class="" action="/new/<%= message.id %>" method="post">
+    <input type="text" name="content" value="" placeholder="Comment">
+    <input type="submit" name="" value="Post">
+    <input type="hidden" name='authenticity_token' value="<%= form_authenticity_token %>">
+  </form>
 </ul>
 <% end %>
